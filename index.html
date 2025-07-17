@@ -42,6 +42,7 @@
     nav {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     nav a {
@@ -249,6 +250,120 @@
       background-color: #fff;
       padding: 4px;
     }
+
+    /* ========== Responsive Styles ========== */
+    @media (max-width: 1024px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+      }
+
+      nav {
+        margin-top: 1rem;
+        gap: 1rem;
+      }
+
+      nav a,
+      .contact-wrapper,
+      .cart-icon {
+        margin-left: 0;
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .hero-content h2 {
+        font-size: 2.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: 300px;
+      }
+
+      .hero-content {
+        padding: 1rem 1.5rem;
+      }
+
+      .hero-content h2 {
+        font-size: 2rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      .shop-logo {
+        height: 40px;
+        width: 40px;
+      }
+
+      .product-card {
+        padding: 1rem;
+      }
+
+      .product-card h3 {
+        font-size: 1rem;
+      }
+
+      .product-card p {
+        font-size: 0.85rem;
+      }
+
+      .product-card button {
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 0.8rem 1rem;
+      }
+
+      .hero {
+        height: 250px;
+      }
+
+      .hero-content {
+        padding: 0.8rem 1.2rem;
+      }
+
+      .hero-content h2 {
+        font-size: 1.5rem;
+      }
+
+      .hero-content p {
+        font-size: 0.9rem;
+      }
+
+      .menu-title {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .products {
+        padding: 1rem;
+        gap: 1rem;
+      }
+
+      .product-card img {
+        height: 160px;
+      }
+
+      footer {
+        font-size: 0.85rem;
+        padding: 0.8rem 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -294,7 +409,6 @@
     </div>
   </section>
 
-  <!-- ✅ Add id="menu" here -->
   <h2 id="menu" class="menu-title">Our Menu</h2>
 
   <section class="products">
@@ -304,35 +418,30 @@
       <p>Strong and bold shot of pure coffee energy.</p>
       <button onclick="addToCart('Espresso Tae', 120)">Add to Cart - ₱120</button>
     </div>
-
     <div class="product-card">
       <img src="istockphoto-505168330-612x612.jpg" alt="Cappuccino">
       <h3>Cappuccino Tae</h3>
       <p>Foamy delight topped with cocoa powder.</p>
       <button onclick="addToCart('Cappuccino Tae', 150)">Add to Cart - ₱150</button>
     </div>
-
     <div class="product-card">
       <img src="iced-caramel-latte-image-feature.jpg" alt="Iced Latte">
       <h3>Iced Latte Tae</h3>
       <p>Chilled comfort with a creamy twist.</p>
       <button onclick="addToCart('Iced Latte Tae', 140)">Add to Cart - ₱140</button>
     </div>
-
     <div class="product-card">
       <img src="mocha.jpg" alt="Mocha">
       <h3>Mocha Tae</h3>
       <p>Chocolate-infused coffee for a rich taste.</p>
       <button onclick="addToCart('Mocha Tae', 160)">Add to Cart - ₱160</button>
     </div>
-
     <div class="product-card">
       <img src="coldbrew.jpg" alt="Cold Brew">
       <h3>Cold Brew Tae</h3>
       <p>Slow-steeped for a smooth and bold flavor.</p>
       <button onclick="addToCart('Cold Brew Tae', 130)">Add to Cart - ₱130</button>
     </div>
-
     <div class="product-card">
       <img src="fws.jpg" alt="Vanilla Macchiato">
       <h3>Vanilla Macchiato Tae</h3>
