@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coffee Bliss | Online Coffee Shop</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #fdf6f0;
+      color: #3e2f1c;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #3e2f1c;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #f7e4c3;
+    }
+
+    .cart-icon {
+      margin-left: 1.5rem;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .cart-dropdown, .contact-dropdown {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: #fff;
+      color: #333;
+      width: 250px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: none;
+      z-index: 10;
+      border-radius: 8px;
+    }
+
+    .cart-icon:hover .cart-dropdown,
+    .contact-wrapper:hover .contact-dropdown {
+      display: block;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      align-items: center;
+    }
+
+    .cart-item button {
+      padding: 0 6px;
+      margin: 0 2px;
+      background: #3e2f1c;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .hero {
+      position: relative;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      background-color: rgba(62, 47, 28, 0.6);
+      padding: 1.5rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .hero-content h2 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      color: #f7e4c3;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+      text-transform: uppercase;
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      color: #fefefe;
+      font-style: italic;
+    }
+
+    .menu-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 2rem;
+      color: #3e2f1c;
+    }
+
+    .products {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 12px;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-card h3 {
+      margin: 1rem 0 0.5rem;
+      font-size: 1.2rem;
+      color: #3e2f1c;
+    }
+
+    .product-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .product-card button {
+      margin-top: 1rem;
+      background-color: #3e2f1c;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .product-card button:hover {
+      background-color: #5a412b;
+    }
+
+    footer {
+      background-color: #3e2f1c;
+      color: #fff;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+    }
+
+    .contact-wrapper {
+      position: relative;
+      margin-left: 1.5rem;
+      display: inline-block;
+    }
+
+    .contact-wrapper a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact-dropdown p {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .shop-logo {
+      height: 50px;
+      width: 50px;
+      object-fit: contain;
+      border-radius: 50%;
+      background-color: #fff;
+      padding: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="231.png" alt="Bolo's Logo" class="shop-logo" />
+      <h1>BOLO'S TAE CAFFEY</h1>
+    </div>
+
+    <nav>
+      <a href="#">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#">Shop</a>
+      <div class="contact-wrapper">
+        <a href="#">Contact</a>
+        <div class="contact-dropdown">
+          <p>📧 Bolojhonlloyd24@gmail.com</p>
+          <p>📞 09810010056</p>
+          <p>👤 Jhon Lloyd Lacia Bolo</p>
+          <p>📍 Kagawasan, Sagbayan, Bohol</p>
+        </div>
+      </div>
+      <div class="cart-icon">
+        🛒
+        <div class="cart-dropdown">
+          <div id="cart-items"></div>
+          <hr />
+          <p><strong>Total:</strong> ₱<span id="cart-total">0</span></p>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93');"></div>
+    <div class="hero-slide" style="background-image: url('local-ad-coffee-1.jpg');"></div>
+    <div class="hero-slide" style="background-image: url('acid-in-coffee.jpg');"></div>
+    <div class="hero-slide" style="background-image: url('FFT_AM_CoffeeTable_008_KF-1200x800.jpg');"></div>
+
+    <div class="hero-content">
+      <h2>Wake Up & Smell the Coffee Tae</h2>
+      <p>KAPE NGA GIKAN SA TAE</p>
+    </div>
+  </section>
+
+  <!-- ✅ Add id="menu" here -->
+  <h2 id="menu" class="menu-title">Our Menu</h2>
+
+  <section class="products">
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" alt="Espresso">
+      <h3>Espresso Tae</h3>
+      <p>Strong and bold shot of pure coffee energy.</p>
+      <button onclick="addToCart('Espresso Tae', 120)">Add to Cart - ₱120</button>
+    </div>
+
+    <div class="product-card">
+      <img src="istockphoto-505168330-612x612.jpg" alt="Cappuccino">
+      <h3>Cappuccino Tae</h3>
+      <p>Foamy delight topped with cocoa powder.</p>
+      <button onclick="addToCart('Cappuccino Tae', 150)">Add to Cart - ₱150</button>
+    </div>
+
+    <div class="product-card">
+      <img src="iced-caramel-latte-image-feature.jpg" alt="Iced Latte">
+      <h3>Iced Latte Tae</h3>
+      <p>Chilled comfort with a creamy twist.</p>
+      <button onclick="addToCart('Iced Latte Tae', 140)">Add to Cart - ₱140</button>
+    </div>
+
+    <div class="product-card">
+      <img src="mocha.jpg" alt="Mocha">
+      <h3>Mocha Tae</h3>
+      <p>Chocolate-infused coffee for a rich taste.</p>
+      <button onclick="addToCart('Mocha Tae', 160)">Add to Cart - ₱160</button>
+    </div>
+
+    <div class="product-card">
+      <img src="coldbrew.jpg" alt="Cold Brew">
+      <h3>Cold Brew Tae</h3>
+      <p>Slow-steeped for a smooth and bold flavor.</p>
+      <button onclick="addToCart('Cold Brew Tae', 130)">Add to Cart - ₱130</button>
+    </div>
+
+    <div class="product-card">
+      <img src="fws.jpg" alt="Vanilla Macchiato">
+      <h3>Vanilla Macchiato Tae</h3>
+      <p>Layered vanilla sweetness with bold espresso.</p>
+      <button onclick="addToCart('Vanilla Macchiato Tae', 170)">Add to Cart - ₱170</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 BOLO'S CAFFEY. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const slides = document.querySelectorAll('.hero-slide');
+    let current = 0;
+
+    function changeSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }
+
+    setInterval(changeSlide, 5000);
+
+    const cart = {};
+
+    function addToCart(item, price) {
+      if (!cart[item]) {
+        cart[item] = { quantity: 1, price };
+      } else {
+        cart[item].quantity++;
+      }
+      renderCart();
+    }
+
+    function removeFromCart(item) {
+      if (cart[item]) {
+        cart[item].quantity--;
+        if (cart[item].quantity <= 0) delete cart[item];
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      cartItems.innerHTML = '';
+
+      let total = 0;
+      for (const item in cart) {
+        const { quantity, price } = cart[item];
+        total += quantity * price;
+        cartItems.innerHTML += `
+          <div class="cart-item">
+            <span>${item} (x${quantity})</span>
+            <div>
+              <button onclick="addToCart('${item}', ${price})">+</button>
+              <button onclick="removeFromCart('${item}')">−</button>
+            </div>
+          </div>
+        `;
+      }
+      cartTotal.innerText = total;
+    }
+  </script>
+</body>
+</html>
