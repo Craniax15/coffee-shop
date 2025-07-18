@@ -11,6 +11,114 @@
       box-sizing: border-box;
       font-family: 'Segoe UI', sans-serif;
     }
+    /* Enhanced size selection modal buttons */
+#sizeModal button {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  margin: 10px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #6b4d31, #a97457);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+#sizeModal button:hover {
+  background: linear-gradient(135deg, #a97457, #6b4d31);
+  transform: scale(1.05);
+}
+/* Stylish Order Summary Modal */
+#orderSummary {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+#orderSummary .modal {
+  background: linear-gradient(145deg, #fdf6f0, #f4e3d3);
+  padding: 30px;
+  border-radius: 20px;
+  width: 360px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  text-align: center;
+  position: relative;
+  animation: zoomIn 0.4s ease;
+}
+
+#orderSummary h2 {
+  color: #3e2f1c;
+  margin-bottom: 10px;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
+#orderSummary img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+#summary-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+#summary-list li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+#summary-total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #8b5e3c;
+}
+
+.modal button {
+  background: linear-gradient(135deg, #6b4d31, #a97457);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.modal button:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+#sizeModal h3 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: #3e2f1c;
+}
+
 
     html {
       scroll-behavior: smooth;
@@ -367,6 +475,17 @@
   </style>
 </head>
 <body>
+  <!-- Size Selection Modal -->
+<div id="sizeModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:999;">
+  <div style="background:#fff; padding:20px; border-radius:10px; text-align:center; width:300px;">
+    <h3 id="modalItemName">Select Size</h3>
+    <button onclick="selectSize('Small')">Small - 120</button>
+    <button onclick="selectSize('Medium')">Medium -140</button>
+    <button onclick="selectSize('Large')">Large - 160</button>
+    <br><br>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
+</div>
   <header>
     <div class="logo-title">
       <img src="231.png" alt="Bolo's Logo" class="shop-logo" />
@@ -392,6 +511,7 @@
           <div id="cart-items"></div>
           <hr />
           <p><strong>Total:</strong> ₱<span id="cart-total">0</span></p>
+          <button onclick="buyItems()" style="margin-top:10px; background:#3e2f1c; color:white; border:none; padding:8px 12px; border-radius:5px; width:100%; cursor:pointer;">Buy</button>
         </div>
       </div>
     </nav>
@@ -416,37 +536,38 @@
       <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" alt="Espresso">
       <h3>Espresso Tae</h3>
       <p>Strong and bold shot of pure coffee energy.</p>
-      <button onclick="addToCart('Espresso Tae', 120)">Add to Cart - ₱120</button>
+      <button onclick="addToCart('Espresso Tae', 120)">Add to Cart</button>
     </div>
     <div class="product-card">
       <img src="istockphoto-505168330-612x612.jpg" alt="Cappuccino">
       <h3>Cappuccino Tae</h3>
       <p>Foamy delight topped with cocoa powder.</p>
-      <button onclick="addToCart('Cappuccino Tae', 150)">Add to Cart - ₱150</button>
+      <button onclick="addToCart('Cappuccino Tae', 150)">Add to Cart</button>
     </div>
     <div class="product-card">
       <img src="iced-caramel-latte-image-feature.jpg" alt="Iced Latte">
       <h3>Iced Latte Tae</h3>
       <p>Chilled comfort with a creamy twist.</p>
-      <button onclick="addToCart('Iced Latte Tae', 140)">Add to Cart - ₱140</button>
+      <button onclick="addToCart('Iced Latte Tae', 140)">Add to Cart</button>
     </div>
     <div class="product-card">
       <img src="mocha.jpg" alt="Mocha">
       <h3>Mocha Tae</h3>
       <p>Chocolate-infused coffee for a rich taste.</p>
-      <button onclick="addToCart('Mocha Tae', 160)">Add to Cart - ₱160</button>
+      <button onclick="addToCart('Mocha Tae', 160)">Add to Cart</button>
     </div>
     <div class="product-card">
       <img src="coldbrew.jpg" alt="Cold Brew">
       <h3>Cold Brew Tae</h3>
       <p>Slow-steeped for a smooth and bold flavor.</p>
-      <button onclick="addToCart('Cold Brew Tae', 130)">Add to Cart - ₱130</button>
+      <button onclick="addToCart('Cold Brew Tae', 130)">Add to Cart</button>
     </div>
     <div class="product-card">
       <img src="fws.jpg" alt="Vanilla Macchiato">
       <h3>Vanilla Macchiato Tae</h3>
       <p>Layered vanilla sweetness with bold espresso.</p>
-      <button onclick="addToCart('Vanilla Macchiato Tae', 170)">Add to Cart - ₱170</button>
+      <button onclick="addToCart('Vanilla Macchiato Tae', 170)">Add to Cart</button>
+      
     </div>
   </section>
 
@@ -454,58 +575,141 @@
     <p>&copy; 2025 BOLO'S CAFFEY. All rights reserved.</p>
   </footer>
 
-  <script>
-    const slides = document.querySelectorAll('.hero-slide');
-    let current = 0;
+ <!-- Replace your current <script> tag with this enhanced version -->
+<script>
+  const slides = document.querySelectorAll('.hero-slide');
+  let current = 0;
 
-    function changeSlide() {
-      slides[current].classList.remove('active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('active');
+  function changeSlide() {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }
+
+  setInterval(changeSlide, 5000);
+
+  const cart = {};
+  let selectedItem = null;
+  let selectedPrice = 0;
+
+  function showSizeModal(item, price) {
+    selectedItem = item;
+    selectedPrice = price;
+    document.getElementById("modalItemName").textContent = `Select size for: ${item}`;
+    document.getElementById("sizeModal").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("sizeModal").style.display = "none";
+    selectedItem = null;
+    selectedPrice = 0;
+  }
+
+  function selectSize(size) {
+    const itemWithSize = `${selectedItem} - ${size}`;
+    let price = selectedPrice;
+    if (size === "Medium") price += 20;
+    if (size === "Large") price += 40;
+
+    if (!cart[itemWithSize]) {
+      cart[itemWithSize] = { quantity: 1, price, original: selectedItem };
+    } else {
+      cart[itemWithSize].quantity++;
     }
 
-    setInterval(changeSlide, 5000);
+    renderCart();
+    closeModal();
+  }
 
-    const cart = {};
+  function addToCart(item, price) {
+    showSizeModal(item, price);
+  }
 
-    function addToCart(item, price) {
-      if (!cart[item]) {
-        cart[item] = { quantity: 1, price };
-      } else {
-        cart[item].quantity++;
-      }
-      renderCart();
+  function removeFromCart(item) {
+    if (cart[item]) {
+      cart[item].quantity--;
+      if (cart[item].quantity <= 0) delete cart[item];
     }
+    renderCart();
+  }
 
-    function removeFromCart(item) {
-      if (cart[item]) {
-        cart[item].quantity--;
-        if (cart[item].quantity <= 0) delete cart[item];
-      }
-      renderCart();
-    }
+  function renderCart() {
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    cartItems.innerHTML = '';
 
-    function renderCart() {
-      const cartItems = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
-      cartItems.innerHTML = '';
-
-      let total = 0;
-      for (const item in cart) {
-        const { quantity, price } = cart[item];
-        total += quantity * price;
-        cartItems.innerHTML += `
-          <div class="cart-item">
-            <span>${item} (x${quantity})</span>
-            <div>
-              <button onclick="addToCart('${item}', ${price})">+</button>
-              <button onclick="removeFromCart('${item}')">−</button>
-            </div>
+    let total = 0;
+    for (const item in cart) {
+      const { quantity, price, original } = cart[item];
+      total += quantity * price;
+      const baseItem = original || item;
+      cartItems.innerHTML += `
+        <div class="cart-item">
+          <span>${item} (x${quantity})</span>
+          <div>
+            <button onclick="showSizeModal('${baseItem}', ${price})">+</button>
+            <button onclick="removeFromCart('${item}')">−</button>
           </div>
-        `;
-      }
-      cartTotal.innerText = total;
+        </div>
+      `;
     }
-  </script>
+
+    cartTotal.innerText = total;
+  }
+  function buyItems() {
+  const summaryList = document.getElementById("summary-list");
+  const summaryTotal = document.getElementById("summary-total");
+  summaryList.innerHTML = "";
+
+  let total = 0;
+  for (const item in cart) {
+    const { quantity, price } = cart[item];
+    total += quantity * price;
+    summaryList.innerHTML += `<li style="margin-bottom: 10px; font-size: 0.95rem;"><strong>${item}</strong> <span style="float:right;">x${quantity} - ₱${price * quantity}</span></li>`;
+
+  }
+
+  summaryTotal.innerText = total;
+  document.getElementById("orderSummary").style.display = "flex";
+
+  // Clear the cart
+  for (const item in cart) {
+    delete cart[item];
+  }
+  renderCart();
+}
+
+function closeSummary() {
+  document.getElementById("orderSummary").style.display = "none";
+}
+
+  
+</script>
+function printSummary() {
+  const printContent = document.querySelector("#orderSummary .modal").innerHTML;
+  const originalContent = document.body.innerHTML;
+
+  document.body.innerHTML = `<div style="padding: 20px; font-family: 'Segoe UI';">${printContent}</div>`;
+  window.print();
+  document.body.innerHTML = originalContent;
+  window.location.reload();
+}
+
+
+<!-- Order Summary Modal -->
+<div id="orderSummary">
+  <div class="modal">
+    <img src="https://cdn-icons-png.flaticon.com/512/415/415733.png" alt="Coffee Icon" />
+    <h2>Order Receipt</h2>
+    <ul id="summary-list"></ul>
+    <p>Total: ₱<span id="summary-total">0</span></p>
+    <button onclick="printSummary()">🖨 Print</button>
+    <button onclick="closeSummary()">✖ Close</button>
+     
+    
+  </div>
+</div>
+  </div>
+</div>
 </body>
 </html>
