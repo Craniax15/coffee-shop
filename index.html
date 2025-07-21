@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
+
   <title>Coffee Bliss | Online Coffee Shop</title>
   <style>
     * {
@@ -28,6 +30,38 @@
   cursor: pointer;
 }
 
+#floatingCartDropdown {
+  display: none;
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  width: 280px;
+  z-index: 1001;
+  padding: 1rem;
+  color: #3e2f1c;
+}
+
+#floatingCartDropdown .cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+#floatingCartDropdown button {
+  padding: 0 6px;
+  margin: 0 2px;
+  background: #3e2f1c;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
 #sizeModal button:hover {
   background: linear-gradient(135deg, #a97457, #6b4d31);
   transform: scale(1.05);
@@ -44,6 +78,21 @@
   z-index: 999;
   animation: fadeIn 0.3s ease;
 }
+#cart-count-badge {
+  position: absolute;
+  top: 8px;
+  right: 6px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 #orderSummary .modal {
   background: linear-gradient(145deg, #fdf6f0, #f4e3d3);
@@ -359,13 +408,25 @@
       padding: 4px;
     }
 
-    /* ========== Responsive Styles ========== */
-    @media (max-width: 1024px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem;
-      }
+nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+nav {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
 
       nav {
         margin-top: 1rem;
@@ -387,7 +448,7 @@
       .hero-content p {
         font-size: 1.1rem;
       }
-    }
+    
 
     @media (max-width: 768px) {
       .hero {
@@ -410,68 +471,136 @@
         font-size: 1.6rem;
       }
 
-      .shop-logo {
-        height: 40px;
-        width: 40px;
-      }
+     .shop-logo {
+  height: 40px;
+  width: 40px;
+}
 
-      .product-card {
-        padding: 1rem;
-      }
+.product-card {
+  padding: 1rem;
+}
 
-      .product-card h3 {
-        font-size: 1rem;
-      }
+.product-card h3 {
+  font-size: 1rem;
+}
 
-      .product-card p {
-        font-size: 0.85rem;
-      }
+.product-card p {
+  font-size: 0.85rem;
+}
 
-      .product-card button {
-        padding: 0.5rem 1rem;
-      }
-    }
+.product-card button {
+  padding: 0.5rem 1rem;
+}
 
-    @media (max-width: 480px) {
-      header {
-        padding: 0.8rem 1rem;
-      }
+nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 
-      .hero {
-        height: 250px;
-      }
+.nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
 
-      .hero-content {
-        padding: 0.8rem 1.2rem;
-      }
+.nav-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 
-      .hero-content h2 {
-        font-size: 1.5rem;
-      }
+nav a {
+  margin: 0;
+  text-decoration: none;
+  color: #3e2f1c;
+  font-weight: 600;
+  font-size: 16px;
+}
 
-      .hero-content p {
-        font-size: 0.9rem;
-      }
+.stars {
+  font-size: 1.2rem;
+  color: #f5b342; /* gold-like star color */
+  margin-top: 0.5rem;
+}
 
-      .menu-title {
-        font-size: 1.5rem;
-        margin-top: 1.5rem;
-      }
+/* ✅ Responsive: screens 480px and below */
+@media (max-width: 480px) {
+  header {
+    padding: 0.8rem 1rem;
+  }
 
-      .products {
-        padding: 1rem;
-        gap: 1rem;
-      }
+  .hero {
+    height: 250px;
+  }
 
-      .product-card img {
-        height: 160px;
-      }
+  .hero-content {
+    padding: 0.8rem 1.2rem;
+  }
 
-      footer {
-        font-size: 0.85rem;
-        padding: 0.8rem 0;
-      }
-    }
+  .hero-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero-content p {
+    font-size: 0.9rem;
+  }
+
+  .menu-title {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .products {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .product-card img {
+    height: 160px;
+  }
+
+  footer {
+    font-size: 0.85rem;
+    padding: 0.8rem 0;
+  }
+  #floatingCartDropdown {
+  display: none;
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  width: 280px;
+  z-index: 1001;
+  padding: 1rem;
+  color: #3e2f1c;
+}
+
+#floatingCartDropdown .cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+#floatingCartDropdown button {
+  padding: 0 6px;
+  margin: 0 2px;
+  background: #3e2f1c;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+}
+
+    
   </style>
 </head>
 <body>
@@ -486,90 +615,222 @@
     <button onclick="closeModal()">Cancel</button>
   </div>
 </div>
-  <header>
-    <div class="logo-title">
+ <header>
+  
+  <div class="logo-title" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+    <div style="display: flex; align-items: center; gap: 0.8rem;">
       <img src="231.png" alt="Bolo's Logo" class="shop-logo" />
       <h1>BOLO'S TAE CAFFEY</h1>
     </div>
+  </div>
 
-    <nav>
-      <a href="#">Home</a>
-      <a href="#menu">Menu</a>
-      <a href="#">Shop</a>
-      <div class="contact-wrapper">
-        <a href="#">Contact</a>
-        <div class="contact-dropdown">
-          <p>📧 Bolojhonlloyd24@gmail.com</p>
-          <p>📞 09810010056</p>
-          <p>👤 Jhon Lloyd Lacia Bolo</p>
-          <p>📍 Kagawasan, Sagbayan, Bohol</p>
-        </div>
-      </div>
-      <div class="cart-icon">
-        🛒
-        <div class="cart-dropdown">
-          <div id="cart-items"></div>
-          <hr />
-          <p><strong>Total:</strong> ₱<span id="cart-total">0</span></p>
-          <button onclick="buyItems()" style="margin-top:10px; background:#3e2f1c; color:white; border:none; padding:8px 12px; border-radius:5px; width:100%; cursor:pointer;">Buy</button>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93');"></div>
-    <div class="hero-slide" style="background-image: url('local-ad-coffee-1.jpg');"></div>
-    <div class="hero-slide" style="background-image: url('acid-in-coffee.jpg');"></div>
-    <div class="hero-slide" style="background-image: url('FFT_AM_CoffeeTable_008_KF-1200x800.jpg');"></div>
-
-    <div class="hero-content">
-      <h2>Wake Up & Smell the Coffee Tae</h2>
-      <p>KAPE NGA GIKAN SA TAE</p>
+  <nav class="nav-bar">
+  <div class="nav-item"><a href="#">Home</a></div>
+  <div class="nav-item"><a href="#menu">Menu</a></div>
+  <div class="nav-item"><a href="#">Shop</a></div>
+  <div class="nav-item contact-wrapper">
+    <a href="#">Contact</a>
+    <div class="contact-dropdown">
+      <p>📧 Bolojhonlloyd24@gmail.com</p>
+      <p>📞 09810010056</p>
+      <p>👤 Jhon Lloyd Lacia Bolo</p>
+      <p>📍 Kagawasan, Sagbayan, Bohol</p>
     </div>
-  </section>
+  </div>
+  <div class="nav-item cart-icon">
+    🛒
+    <div class="cart-dropdown">
+      <div id="cart-items"></div>
+      <hr />
+      <p><strong>Total:</strong> ₱<span id="cart-total">0</span></p>
+      <button onclick="buyItems()" style="margin-top:10px; background:#3e2f1c; color:white; border:none; padding:8px 12px; border-radius:5px; width:100%; cursor:pointer;">Buy</button>
+    </div>
+  </div>
+</nav>
+
+</header>
+
+ <section class="hero">
+  <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93');"></div>
+  <div class="hero-slide" style="background-image: url('local-ad-coffee-1.jpg');"></div>
+  <div class="hero-slide" style="background-image: url('acid-in-coffee.jpg');"></div>
+  <div class="hero-slide" style="background-image: url('FFT_AM_CoffeeTable_008_KF-1200x800.jpg');"></div>
+
+<div class="hero-content">
+  <h2>Wake Up & Smell the Coffee Tae</h2>
+  <p id="originalMessage">KAPE NGA GIKAN SA TAE</p>
+  <p id="greetingMessage"></p> <!-- Greeting goes here -->
+</div>
+
+</section>
+
 
   <h2 id="menu" class="menu-title">Our Menu</h2>
+   <!-- Centered Search Bar -->
+<div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+  <input 
+    type="text" 
+    id="searchBar" 
+    placeholder="Search coffee..." 
+    oninput="filterProducts()"
+    style="padding: 10px 16px; width: 90%; max-width: 400px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;"
+  />
+</div>
 
-  <section class="products">
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" alt="Espresso">
-      <h3>Espresso Tae</h3>
-      <p>Strong and bold shot of pure coffee energy.</p>
-      <button onclick="addToCart('Espresso Tae', 120)">Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <img src="istockphoto-505168330-612x612.jpg" alt="Cappuccino">
-      <h3>Cappuccino Tae</h3>
-      <p>Foamy delight topped with cocoa powder.</p>
-      <button onclick="addToCart('Cappuccino Tae', 150)">Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <img src="iced-caramel-latte-image-feature.jpg" alt="Iced Latte">
-      <h3>Iced Latte Tae</h3>
-      <p>Chilled comfort with a creamy twist.</p>
-      <button onclick="addToCart('Iced Latte Tae', 140)">Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <img src="mocha.jpg" alt="Mocha">
-      <h3>Mocha Tae</h3>
-      <p>Chocolate-infused coffee for a rich taste.</p>
-      <button onclick="addToCart('Mocha Tae', 160)">Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <img src="coldbrew.jpg" alt="Cold Brew">
-      <h3>Cold Brew Tae</h3>
-      <p>Slow-steeped for a smooth and bold flavor.</p>
-      <button onclick="addToCart('Cold Brew Tae', 130)">Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <img src="fws.jpg" alt="Vanilla Macchiato">
-      <h3>Vanilla Macchiato Tae</h3>
-      <p>Layered vanilla sweetness with bold espresso.</p>
-      <button onclick="addToCart('Vanilla Macchiato Tae', 170)">Add to Cart</button>
-      
-    </div>
-  </section>
+ <section class="products">
+  <div class="product-card">
+    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" alt="Espresso">
+    <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+    <h3>Espresso Tae</h3>
+    <p>Strong and bold shot of pure coffee energy.</p>
+    <button onclick="addToCart('Espresso Tae', 120)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="istockphoto-505168330-612x612.jpg" alt="Cappuccino">
+    <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+    <h3>Cappuccino Tae</h3>
+    <p>Foamy delight topped with cocoa powder.</p>
+    <button onclick="addToCart('Cappuccino Tae', 150)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="iced-caramel-latte-image-feature.jpg" alt="Iced Latte">
+    <div class="badge" style="position:absolute; top:10px; left:10px; background:gold; color:#3e2f1c; padding:5px 8px; font-size:0.8rem; border-radius:5px; font-weight:bold;">
+  Best Seller
+</div>
+
+    <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+    <h3>Iced Latte Tae</h3>
+    <div class="badge" style="position:absolute; top:10px; left:10px; background:gold; color:#3e2f1c; padding:5px 8px; font-size:0.8rem; border-radius:5px; font-weight:bold;">
+  Best Seller
+</div>
+
+    <p>Chilled comfort with a creamy twist.</p>
+    <button onclick="addToCart('Iced Latte Tae', 140)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="mocha.jpg" alt="Mocha">
+    <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+    <h3>Mocha Tae</h3>
+    <p>Chocolate-infused coffee for a rich taste.</p>
+    <button onclick="addToCart('Mocha Tae', 160)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="coldbrew.jpg" alt="Cold Brew">
+    <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+    <h3>Cold Brew Tae</h3>
+    <p>Slow-steeped for a smooth and bold flavor.</p>
+    <button onclick="addToCart('Cold Brew Tae', 130)">Add to Cart</button>
+  </div>
+
+  <div class="product-card">
+    <img src="fws.jpg" alt="Vanilla Macchiato">
+    <div class="badge" style="position:absolute; top:10px; left:10px; background:gold; color:#3e2f1c; padding:5px 8px; font-size:0.8rem; border-radius:5px; font-weight:bold;">
+  Best Seller
+</div>
+
+    <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+    <h3>Vanilla Macchiato Tae</h3>
+    <p>Layered vanilla sweetness with bold espresso.</p>
+    <button onclick="addToCart('Vanilla Macchiato Tae', 170)">Add to Cart</button>
+  </div>
+  <div class="product-card">
+  <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93" alt="Americano">
+  <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+  <h3>Americano Tae</h3>
+  <p>Smooth hot coffee with a bold aftertaste.</p>
+  <button onclick="addToCart('Americano Tae', 110)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+  <img src="flatwhite.jpg" alt="Flat White">
+  <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+  
+  <h3>Flat White Tae</h3>
+  <p>Silky microfoam with strong espresso.</p>
+  <button onclick="addToCart('Flat White Tae', 135)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+  <img src="affo.jpg" alt="Affogato">
+  <div class="badge" style="position:absolute; top:10px; left:10px; background:gold; color:#3e2f1c; padding:5px 8px; font-size:0.8rem; border-radius:5px; font-weight:bold;">
+  Best Seller
+</div>
+  <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+  <h3>Affogato Tae</h3>
+  <p>Espresso poured over vanilla ice cream.</p>
+  <button onclick="addToCart('Affogato Tae', 160)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+  <img src="Irish-Coffee-649x820.jpg" alt="Irish Coffee">
+  <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+  <h3>Irish Coffee Tae</h3>
+  <p>Sweet and creamy with a whiskey kick.</p>
+  <button onclick="addToCart('Irish Coffee Tae', 180)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+  <img src="cafeaut.jpg" alt="Café au Lait">
+  <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+  <h3>Café au Lait Tae</h3>
+  <p>Rich brew mixed with steamed milk.</p>
+  <button onclick="addToCart('Café au Lait Tae', 140)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+  <img src="iced-caramel-latte-image-feature.jpg" alt="Hazelnut Latte">
+  <div class="badge" style="position:absolute; top:10px; left:10px; background:gold; color:#3e2f1c; padding:5px 8px; font-size:0.8rem; border-radius:5px; font-weight:bold;">
+  Best Seller
+</div>
+  <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+  <h3>Hazelnut Latte Tae</h3>
+  <p>Nutty flavor blended with creamy coffee.</p>
+  <button onclick="addToCart('Hazelnut Latte Tae', 150)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+  <img src="IcedPumpkinSpiceLatte-1200-x-1200.jpg" alt="Pumpkin Spice Latte">
+  <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+  <h3>Pumpkin Spice Tae</h3>
+  <p>Spiced coffee for cozy cravings.</p>
+  <button onclick="addToCart('Pumpkin Spice Tae', 160)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+  <img src="turkish.jpg" alt="Turkish Coffee">
+  <div class="badge" style="position:absolute; top:10px; left:10px; background:gold; color:#3e2f1c; padding:5px 8px; font-size:0.8rem; border-radius:5px; font-weight:bold;">
+  Best Seller
+</div>
+  <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+  <h3>Turkish Coffee Tae</h3>
+  <p>Traditional unfiltered rich brew.</p>
+  <button onclick="addToCart('Turkish Coffee Tae', 170)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+  <img src="coconut.jpg" alt="Coconut Coffee">
+  <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+  <h3>Coconut Coffee Tae</h3>
+  <p>Tropical twist on creamy iced coffee.</p>
+  <button onclick="addToCart('Coconut Coffee Tae', 145)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+  <img src="espresso.jpg" alt="Espresso Con Panna">
+  <div class="badge" style="position:absolute; top:10px; left:10px; background:gold; color:#3e2f1c; padding:5px 8px; font-size:0.8rem; border-radius:5px; font-weight:bold;">
+  Best Seller
+</div>
+  <div class="stars">⭐️⭐️⭐️⭐️☆</div>
+  <h3>Espresso Con Panna Tae</h3>
+  <p>Espresso topped with whipped cream.</p>
+  <button onclick="addToCart('Espresso Con Panna Tae', 150)">Add to Cart</button>
+</div>
+</section>
+
 
   <footer>
     <p>&copy; 2025 BOLO'S CAFFEY. All rights reserved.</p>
@@ -620,6 +881,7 @@
     renderCart();
     closeModal();
   }
+  
 
   function addToCart(item, price) {
     showSizeModal(item, price);
@@ -632,6 +894,71 @@
     }
     renderCart();
   }
+  function toggleCartDropdown() {
+  const dropdown = document.getElementById("floatingCartDropdown");
+  
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+}
+
+function renderCart() {
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const floatingItems = document.getElementById('floating-cart-items');
+  const floatingTotal = document.getElementById('floating-cart-total');
+  const cartCountBadge = document.getElementById('cart-count-badge');
+
+  cartItems.innerHTML = '';
+  floatingItems.innerHTML = '';
+
+  let total = 0;
+  let itemCount = 0;
+
+  for (const item in cart) {
+    const { quantity, price, original } = cart[item];
+    total += quantity * price;
+    itemCount += quantity;
+    const baseItem = original || item;
+
+    const itemHTML = `
+      <div class="cart-item">
+        <span>${item} (x${quantity})</span>
+        <div>
+          <button onclick="showSizeModal('${baseItem}', ${price})">+</button>
+          <button onclick="removeFromCart('${item}')">−</button>
+        </div>
+      </div>
+    `;
+
+    cartItems.innerHTML += itemHTML;
+    floatingItems.innerHTML += itemHTML;
+  }
+
+  cartTotal.innerText = total;
+  floatingTotal.innerText = total;
+
+  // Update cart count badge
+  cartCountBadge.innerText = itemCount;
+  cartCountBadge.style.display = itemCount > 0 ? "flex" : "none";
+}
+
+
+function toggleCartDropdown() {
+  const dropdown = document.getElementById("floatingCartDropdown");
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+}
+
+
+  function showGreeting() {
+  const hour = new Date().getHours();
+  let greeting = "Good Morning! ☕ Order your coffee now!";
+  if (hour >= 12 && hour < 18) greeting = "Good Afternoon! ☀️ Time for coffee!";
+  else if (hour >= 18) greeting = "Good Evening! 🌙 Enjoy a cozy cup!";
+
+  const originalText = "KAPE NGA GIKAN SA TAE";
+  document.querySelector('.hero-content p').textContent = `${originalText} — ${greeting}`;
+}
+window.onload = showGreeting;
+
 
   function renderCart() {
     const cartItems = document.getElementById('cart-items');
@@ -684,32 +1011,65 @@ function closeSummary() {
 }
 
   
-</script>
-function printSummary() {
-  const printContent = document.querySelector("#orderSummary .modal").innerHTML;
-  const originalContent = document.body.innerHTML;
+  </script>
 
-  document.body.innerHTML = `<div style="padding: 20px; font-family: 'Segoe UI';">${printContent}</div>`;
-  window.print();
-  document.body.innerHTML = originalContent;
-  window.location.reload();
-}
+  <!-- Order Summary Modal -->
+  <div id="orderSummary">
+    <div class="modal">
+      <img src="logotae.png" alt="Coffee Icon" />
+      <h2>Order Receipt</h2>
+      <ul id="summary-list"></ul>
+      <p>Total: ₱<span id="summary-total">0</span></p>
+      <button onclick="printSummary()">🖨 Print</button>
+      <button onclick="closeSummary()">✖ Close</button>
+    </div>
+  </div>
 
+  <script>
+    function printSummary() {
+      const printContent = document.querySelector("#orderSummary .modal").innerHTML;
+      const originalContent = document.body.innerHTML;
 
-<!-- Order Summary Modal -->
-<div id="orderSummary">
-  <div class="modal">
-    <img src="https://cdn-icons-png.flaticon.com/512/415/415733.png" alt="Coffee Icon" />
-    <h2>Order Receipt</h2>
-    <ul id="summary-list"></ul>
-    <p>Total: ₱<span id="summary-total">0</span></p>
-    <button onclick="printSummary()">🖨 Print</button>
-    <button onclick="closeSummary()">✖ Close</button>
-     
+      document.body.innerHTML = `<div style="padding: 20px; font-family: 'Segoe UI';">${printContent}</div>`;
+      window.print();
+      document.body.innerHTML = originalContent;
+      window.location.reload();
+    }
+  function filterProducts() {
+    const input = document.getElementById("searchBar").value.toLowerCase();
+    const cards = document.querySelectorAll(".product-card");
+
+    cards.forEach(card => {
+      const title = card.querySelector("h3").textContent.toLowerCase();
+      card.style.display = title.includes(input) ? "block" : "none";
+    }); 
+  } 
+  
     
-  </div>
+  </script>
+<!-- Floating Cart Icon with Counter -->
+<div id="floatingCart" onclick="toggleCartDropdown()" 
+     style="position: fixed; bottom: 20px; right: 20px; background: #3e2f1c; 
+     color: white; border-radius: 50%; width: 60px; height: 60px; 
+     display: flex; justify-content: center; align-items: center; 
+     font-size: 1.5rem; cursor: pointer; z-index: 1000; position: fixed;">
+  🛒
+  <span id="cart-count-badge" 
+        style="position: absolute; top: 8px; right: 6px; 
+        background-color: red; color: white; border-radius: 50%; 
+        width: 20px; height: 20px; font-size: 12px; 
+        display: flex; justify-content: center; align-items: center;">
+    0
+  </span>
 </div>
-  </div>
+
+<!-- Floating Cart Dropdown -->
+<div id="floatingCartDropdown">
+  <div id="floating-cart-items"></div>
+  <hr />
+  <p><strong>Total:</strong> ₱<span id="floating-cart-total">0</span></p>
+  <button onclick="buyItems()" style="width: 100%; margin-top: 10px;">Buy</button>
 </div>
+
 </body>
 </html>
