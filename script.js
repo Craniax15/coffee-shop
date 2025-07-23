@@ -66,7 +66,7 @@ function renderCart() {
   const cartTotal = document.getElementById('cart-total');
   const floatingItems = document.getElementById('floating-cart-items');
   const floatingTotal = document.getElementById('floating-cart-total');
-  const cartCountBadge = document.getElementById('cart-count-badge');
+  const cartCountBadges = document.querySelectorAll('.cart-count-badge');
 
   if (!cartItems || !floatingItems) return;
 
@@ -98,8 +98,10 @@ function renderCart() {
 
   cartTotal.innerText = total;
   floatingTotal.innerText = total;
-  cartCountBadge.innerText = itemCount;
-  cartCountBadge.style.display = itemCount > 0 ? "flex" : "none";
+  cartCountBadges.forEach(badge => {
+    badge.innerText = itemCount;
+    badge.style.display = itemCount > 0 ? "flex" : "none";
+  });
 }
 
 function buyItems() {
